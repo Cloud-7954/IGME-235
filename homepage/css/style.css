@@ -6,10 +6,9 @@ body
 
 .title
 {
-    border: 1px solid #a60a0a;
-    padding-top: 320px;
+    padding-top: 260px;
     padding-left: 120px;
-    padding-bottom: 320px;
+    padding-bottom: 300px;
     font-size: 48px;
     font-weight: 750;
     letter-spacing: 3px;    
@@ -30,7 +29,7 @@ body
 
 #about
 {
-
+    border: 1px solid darkred
 }
 
 #projects
@@ -40,5 +39,27 @@ body
 
 #links
 {
-    border-left: 5px solid light;
+    border-left: 5px solid rgb(14, 64, 138);
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgba(80, 80, 80, 0.633);
+}
+
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
+}
+
+a:focus {
+    outline: 2px solid red;
 }
