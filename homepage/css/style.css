@@ -2,50 +2,135 @@ body
 {
     background: black;
     color:white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#top{
+    height: 85vh;
+    padding-left: 100px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(20, 20, 20);
 }
 
 .title
 {
-    padding-top: 260px;
-    padding-left: 120px;
-    padding-bottom: 300px;
-    font-size: 48px;
+
+    font-size: 52px;
     font-weight: 750;
     letter-spacing: 3px;    
+    border-left: 5px solid #5d5d5d;
     margin: 0;
     font-family: "Courier New", monospace;
+    padding-left: 40px;
+    text-shadow: 4px 3px #464646;
 }
 
-.section
+/* #about
 {
-    border: 1px solid #333;
-    padding: 20px;
-    margin: 20px 0;
+    border: 1px solid darkred
+} */
+ 
+.aboutsection
+{
+    margin: 20px 80px;      
+    padding: 30px 140px;
+}
+
+.abouttitle
+{
+    font-size: 40px;       
+    margin: 0 0 20px 0;
+}
+
+.aboutcontent 
+{
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    padding-top: 30px;
+    margin: 20px;
+}
+
+.abouttext 
+{
+    flex: 1;
+    font-size: 18px;
+}
+
+.aboutmedia 
+{
+    /* flex: 1;
+    text-align: right; */
+    width : 320px;
 }
 
 #profilepic
 {
-
+    width: 260px;
+    height: auto;
+    border: 1px solid #000000;
+    display: block;
 }
 
-#about
+.prosection
 {
-    border: 1px solid darkred
+    margin: 150px 20vh;
+    padding: 40px 60px;
 }
 
-#projects
+.proheader 
 {
-    border-left: 5px solid red;
+    text-align: center;
+    margin-bottom: 60px;
 }
 
-#links
+.protitle 
 {
-    border-left: 5px solid rgb(14, 64, 138);
+    font-size: 40px;
+    letter-spacing: 5px;
 }
+
+.probox 
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.problock 
+{
+    flex: 1;
+    border: 1px solid #494949;
+    padding-top: 40px;
+    padding-bottom: 70px;
+    text-align: center;
+    background-color: #1b1b1b;
+}
+
+.proname 
+{
+    margin-bottom: 25px;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.section
+{
+    border-top: 1px solid #333;
+    padding: 20px;
+    background-color: #121212;
+}
+
+
+
+
+
+
+
+
 
 a:link {
-    color: white;
-    text-decoration: none;
+    color: rgb(168, 168, 168);
 }
 
 a:visited {
