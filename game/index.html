@@ -9,23 +9,92 @@
 	<link rel="icon" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" sizes="16x16" href="favicon-16x16.png">
 
-
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
 	<style>
     h1 { 
-        color:red;
-        font-family: sans-serif;
-        border-bottom: 1px solid blue;
-        }
+		color: #C02320;
+        font-family: "Dancing Script", cursive;
+        border-bottom: 1px solid #C02320;
+    }
+	
+	header, footer, main {
+        border: 1px solid black;
+		margin: 0 auto;
+		width: 80vw;
+		padding: 2rem;
+		background-color: white;
+    }
+	header {
+        overflow: auto; 
+        margin-top: 2rem; 
+    }
+
     blockquote { 
-        background-color: lightgray;
+        background-color: #FDB800;
         padding: 1rem;
-        }
+        border-left: 5px solid #620000;
+    }
+	body {
+		background-color: #522C01; 
+		color: #522C01;
+		font-family: Arial, sans-serif;
+		margin: 0; 
+	}
+	h2{
+		color: #C02320;
+		font-family: "Caveat", cursive;;
+	}
+	p {
+    	margin-left: 100px;
+	}
+	.side{
+		float:right; margin: 0 12px;
+		text-align: center;
+	}
+	.side a {
+		display: block;
+		margin-top: 5px;
+	}
+	
+	footer p {
+        margin-left: 0;
+        text-align: center;
+        color: #522C01;
+    }
+
+	footer {
+        background-color: #FDB800; 
+        margin-top: 1rem; 
+        margin-bottom: 2rem;
+    }
+
+	a:link {
+		color: #2B007D;
+		font-weight: bold;
+		text-decoration: none; 
+	}
+	
+	a:visited 
+	{
+		color: #620000;
+	}
+
+	a:hover {
+		color: #C02320;
+		text-decoration: underline;
+	}
+
+	a:active {
+		color: red;
+	}
 	</style>
 
 </head>
 
-<body style="background-color:lightblue;">
+<body>
 	<header>
 		<object data="images/dig-dug.svg"
         	type="image/svg+xml"
@@ -39,14 +108,15 @@
 
 		<h1>Dig Dug</h1>
 
-		<img src="images/dig-dug-burnt.png" alt="dig dug burnt image">
-
-		<p>
-    		<a href="big/pic1.html">View Large Image</a>
-  		</p>
 	</header>
 	
 	<main>
+		
+		<div class = "side">
+			<img src="images/dig-dug-burnt.png" alt="dig dug burnt image">
+			<a href="big/pic1.html">View Large Image</a>
+		</div>
+
 		<h2>Publishing Info</h2>
 		<ul>
 			<li>Published by: Atari, Inc.</li> 
@@ -83,8 +153,6 @@
 			imagination. And maybe they were into horror movies too.
 			-- https://www.mobygames.com/mobyrank/source/sourceId,540/
 		</blockquote>
-
-		<hr>
 	</main>
 	
 	<footer id = "source">
