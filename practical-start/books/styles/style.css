@@ -1,0 +1,87 @@
+/* Page-wide styles can go here */
+*{
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* Navigation link states — define all five */
+:hover{
+    color:white;
+
+}
+:active{
+    
+}
+:focus{
+
+}
+:visited{
+    color:rgb(85, 85, 250)
+}
+
+/* Header styling */
+header {
+    color: #ffffff;
+    background-color: #165cff;
+    border: 2px solid gray;
+    text-align: center;  
+    font-size: 1.5rem;
+    padding: 10px;  
+
+}
+header nav{
+    max-width: 1040px;
+    margin: 36px auto;
+    padding: 0 22px;
+
+
+}
+header nav ul{
+    display: flex;
+    list-style: none;
+
+}
+header nav ul li a{
+    display: inline-block;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+
+}
+
+/* Footer styling */
+footer {
+    background-color: rgb(1, 77, 1);
+    color:white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Main content */
+main {
+    padding:10px;
+}
+
+main p{
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+/* Feel free to add any additional CSS rules that you need */
+
+/* Book list styling using flexbox or grid */
+.book-list {
+
+}
+
+.book {
+
+    padding: 15px;
+
+}
+
+.book h3 {
+
+}
