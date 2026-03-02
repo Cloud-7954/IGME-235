@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 Documentation - Fran Bow</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6; 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            color: #333; 
+        }
+        h1, h2 { 
+            border-bottom: 2px solid #ccc; 
+            padding-bottom: 5px; 
+            margin-top: 30px; 
+        }
+        .links-section { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            margin-bottom: 30px; 
+        }
+        .links-section a { 
+            color: #0055a2; 
+            text-decoration: none; 
+            margin-right: 20px; 
+        }
+        .links-section a:hover { 
+            text-decoration: underline; 
+        }
+        .sketch-box { 
+            margin: 20px 0; 
+            padding: 10px; 
+            border: 1px dashed #999; 
+            display: inline-block; 
+        }
+        img { 
+            max-width: 100%; 
+            height: auto; 
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Project 1 Documentation</h1>
+
+    <div class="links-section">
+        <a href="src/athletics.pdf" target="_blank">View Original Source PDF</a>
+        <a href="spec.html" target="_blank">View Spec Page</a>
+    </div>
+
+    <h2>Project Goal & Audience</h2>
+    <p>The goal of this first project is to build a one-page landing site centered around the indie psychological horror game <em>Fran Bow</em>. For Phase 1, I extracted the structural layout from the provided RIT Athletics magazine page and replaced the content with "lorem ipsum" placeholder text and my own game assets to prepare for Phase 2. I applied a darker, atmospheric color palette suitable for my game's theme. The audience would be fans of narrative-driven indie games and psychological horror. I chose this specific layout because the large horizontal spaces are perfect for showcasing the beautiful, hand-drawn background art of the game.</p>
+
+    <h2>Notes & Challenges</h2>
+
+    <ul>
+        <li><strong>Grid & Columns:</strong> I used a CSS Grid setup grid-template-columns: 3fr 1frto split the text and sidebar. To achieve the magazine-style text layout within the left section, I utilized the CSS column-count: 3 property.</li>
+        <li><strong>Image Formatting:</strong> Getting the images to display 100% of their content without being cropped required swapping from background images to native img tags and using the object-fit: contain CSS property.</li>
+        <li><strong>Layering:</strong> Getting the text to overlap the top image properly required wrapping the image in a relative container and using absolute positioning for the text, satisfying the layering requirement.</li>
+    </ul>
+
+    <h2>Responsive Plan</h2>
+    <p>When the screen width decreases below 900px, the grid collapses from a two-column setup to a single column (1fr), moving the right-side boxes directly underneath the main text block. The 3 text columns also reduce to 2 columns, and eventually to a single column on mobile screens (max-width 600px).</p>
+
+    <div class="sketch-box">
+        <p><strong>Desktop Layout Sketch:</strong></p>
+        <img src="media/desktop-sketch.png" alt="desktop sketch">
+    </div>
+    
+    <div class="sketch-box">
+        <p><strong>Mobile Layout Sketch:</strong></p>
+        <img src="media/mobile-sketch.png" alt="mobile sketch">
+    </div>
+
+    <h2>Resources & References</h2>
+    <ul>
+        <li><strong>Original Source Layout:</strong> <em>athletics.pdf</em> (Provided via myCourses)</li>
+        <li><strong>Top Image:</strong> Fran Bow Title Art (by Killmonday Games)</li>
+        <li><strong>Bottom Image:</strong> Ithersta Document / Page 15 (by Killmonday Games)</li>
+        <li><strong>Fonts:</strong> Arial, Helvetica, sans-serif (Headings) / Georgia, serif (Main Body)</li>
+    </ul>
+
+</body>
+</html>
