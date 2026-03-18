@@ -158,9 +158,13 @@ body {
 
 
 a:link { color: #d4af37; text-decoration: none; font-weight: bold; }
+
 a:visited { color: #b8860b; }
+
 a:focus { outline: 2px dashed #8b0000; background-color: #333; }
+
 a:hover { color: #fff; text-decoration: underline; }
+
 a:active { color: #ff4500; }
 
 @media (max-width: 900px) {
