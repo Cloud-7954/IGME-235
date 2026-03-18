@@ -173,3 +173,37 @@ a:active { color: #ff4500; }
     .hero-bottom-text h2 { font-size: 2.2rem; }
 }
 
+.main-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.85); 
+    padding: 15px 0;
+    z-index: 10;
+    border-bottom: 2px solid #8b0000;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav li a {
+    color: #dedede;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    padding-bottom: 5px;
+}
+
+.main-nav li a:hover {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid #8b0000;
+}
+
