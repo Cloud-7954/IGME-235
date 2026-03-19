@@ -21,6 +21,35 @@
 	"use strict"; 
   
   // add your own code here.
+  	document.querySelector("h1").innerHTML = "My UFO Page";
+
+	let h2Elements = document.querySelectorAll("h2");
+    h2Elements[0].innerHTML = "My UFO Info";
+    h2Elements[1].innerHTML = "My UFO Pictures";
+    h2Elements[2].innerHTML = "";
+
+    document.body.style.fontFamily = "sans-serif";
+    document.body.style.color = "#990000"; 
+
+   
+    let pElements = document.querySelectorAll("p");
+    
+    pElements[0].innerHTML = "Report your UFO sightings here: <a href='http://www.nuforc.org'>http://www.nuforc.org</a>";
+    pElements[0].style.color = "green";
+    pElements[0].style.fontWeight = "bold";
+    pElements[0].style.fontSize = "2em";
+    pElements[0].style.textTransform = "uppercase";
+    pElements[0].style.textShadow = "3px 2px #A44";
+
+    pElements[1].innerHTML = "";
+
+   
+    document.querySelector("#lastParagraph").innerHTML = "<img src='https://s.hdnux.com/photos/01/25/20/06/22348185/4/1200x0.jpg' alt='UFO Image' />";
+
+    
+    let currentYear = new Date().getFullYear();
+    document.querySelector("footer").innerHTML = "&copy; " + currentYear + " Cloud Que ";
+</script>
   
 	
 	</script>
