@@ -54,6 +54,19 @@ for (let food of foods) {
 }
 
 
+let linksList = document.querySelector("#linksList");
+
+for (let key in links) {
+    
+	let li = document.createElement("li");
+
+    let a = document.createElement("a");  
+    a.href = links[key];              
+    a.textContent = key;                  
+    li.appendChild(a);                    
+    linksList.appendChild(li);             
+}
+
 </script>
 </body>
 </html>
