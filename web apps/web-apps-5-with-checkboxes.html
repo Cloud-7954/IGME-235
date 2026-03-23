@@ -97,10 +97,14 @@ for (let box of checkboxes) {
 }
 
 submitButton.addEventListener('click', () => {
-    let colors = getSelectedColors(); 
+    let colors = getSelectedColors();
     
     if (colors.length > 0) {
-        infoDisplay.textContent = `Your FINAL CHOICES are: ${colors.join(", ")}`;
+        let colorString = "";
+        for (let i = 0; i < colors.length; i++) {
+            colorString += colors[i] + " "; 
+        }
+        infoDisplay.textContent = `Your FINAL CHOICES are: ${colorString}`;
     } else {
         infoDisplay.textContent = "Please select at least one color.";
     }
