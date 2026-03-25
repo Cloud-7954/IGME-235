@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Squad Builder</title>
+  <style>
+    body { font-family: monospace; background: #1a1a2e; color: #eee; padding: 2rem; }
+    #output { white-space: pre-wrap; line-height: 1.8; }
+    ul { list-style: none; padding-left: 1rem; }
+    li { margin: 0.3rem 0; }
+    strong { color: #e94560; }
+  </style>
+</head>
+<body>
+  <h1>Squad Builder</h1>
+  <div id="output"></div>
+  <script>
+  "use strict";
+
+  // Helper function to display output on the page
+  function print(text) {
+    document.querySelector("#output").innerHTML += text + "\n";
+  }
+
+  // === PART 1: Our first hero (Object Literals) ===
+  let hero1 = {
+    name: "Kira",
+    class: "Mage",
+    level: 5,
+    hp: 80,
+    attack: 25
+  };
+
+  // TODO: Log hero1 to the console
+  // console.log(hero1);
+  // // TODO: Access properties with dot notation and bracket notation
+  // console.log(hero1.name);
+  // console.log(hhero1["first name"]); 
+  print('Hero Created ${hero1.name}');
+  // TODO: Add a "weapon" property
+  hero1.weapon = "Sword";
+  print("Hero1 Weapon: " +hero1.weapon);
+  hero1.attack = 40;
+  Object.seal(hero1);
+
+
+  console.log(hero1);
+  // TODO: Show what happens when you make a typo adding a property
+  // TODO: Try Object.seal() to prevent that
+
+
+
+  // === PART 2: Inspect the hero (for...in) ===
+  for (let key in hero1) {
+    print(key + ": " + hero1[key]);
+  }
+
+  // TODO: Use a for...in loop to print all of hero1's properties
+  // Remember: for...in = keys of an OBJECT, for...of = values of an ARRAY
+
+
+
+  // === PART 3: Heroes that DO things (this keyword) ===
+  let hero2 = {
+    name: "Bron",
+    class: "Warrior",
+    level: 3,
+    hp: 120,
+    maxHp: 120,
+    attack: 35,
+    weapon: "Axe",
+    isAlive: true,
+    takeDamage: function(amount){
+      this.hp -= amount;
+      if (this.hp <= 0) {
+        this.hp = 0;
+        this.isAlive = false;
+      }
+    }
+  };
+  // TODO: Create hero2 with a takeDamage() method
+  // First try it WITHOUT this. — what goes wrong?
+  // Then fix it WITH this.
+  // Test it: hero2.takeDamage(50), then hero2.takeDamage(200)
+  print("\n----Combat!----");
+  print(`${hero2.name} Health: ${hero2.hp}/${hero2.maxHp}`);
+
+  hero2.takeDamage(50);
+  print(`${hero2.name} takes 50 damage! Health: ${hero2.hp}/${hero2.maxHp}`);
+  print(hero2.isAlive);
+
+
+
+  // === PART 4: Cloning gone wrong (Value vs Reference) ===
+
+  // TODO: Show value types — copy a number, change the original
+  
+  // TODO: Show reference types — heroA, heroB pointing to same object, heroC as separate
+  let heroA = { name: "Kira"};
+  let heroB = heroA; // Both heroA and heroB point to the same object
+  let heroC = { name: "Kira"}; // A new object with the
+
+
+  // TODO: Test equality — same reference vs same contents
+  print('HeroA: ' + heroA.name);
+  print('HeroB: ' + heroB.name);
+
+  print("same contents?" + (JSON.stringify(heroA) === JSON.stringify(heroC)));
+  print("truely the same??" + (heroA === heroC));
+
+  let heroCopy = {...heroA};
+  print("Hero Copy: " + heroCopy.name);
+
+  let nested = {name: "kira", stats: {hp: 80, attack: 25}};
+  // TODO: JSON.stringify() hack for content comparison
+  // TODO: Spread operator to actually copy
+  // TODO: Shallow copy demo — what happens with nested objects?
+  // TODO: const with objects — can change properties but not the reference
+
+
+
+  // === PART 5: Assemble the squad (Arrays) ===
+  let squad = [
+    { name: "Kira",   class: "Mage",    level: 5,  hp: 80,  attack: 25 },
+    { name: "Bron",   class: "Warrior",  level: 3,  hp: 120, attack: 35 },
+    { name: "Lyra",   class: "Ranger",   level: 7,  hp: 90,  attack: 30 },
+    { name: "Pip",    class: "Healer",   level: 2,  hp: 60,  attack: 10 },
+    { name: "Zedd",   class: "Mage",     level: 8,  hp: 95,  attack: 40 },
+    { name: "Thorn",  class: "Warrior",  level: 6,  hp: 110, attack: 32 }
+  ];
+
+  // const boss = {name: "Dragon", hp:500};
+  // console.log("boss name: " + boss.name);
+  // boss.name = "idiot dragon";
+  // console.log("boss name: " + boss.name);
+
+  // TODO: Print the squad size and first/last hero
+  // TODO: Use push() to add a new recruit
+
+
+
+  // === PART 6: Roll call (for...of with arrays) ===
+
+  // TODO: Use for...of to loop through squad and print each hero's info
+
+
+
+  // === PART 7: Mission briefing (filter) ===
+
+  // TODO: Filter to heroes level 5+ (elite squad)
+  // TODO: Show that the original squad is unchanged
+  // TODO: Try more filters — all mages, tanks with 100+ HP
+
+
+squad.push({ name: "Bill",   class: "Smith",    level: 4,  hp: 70,  attack: 28 });
+  // === PART 8: Quest rewards (map) ===
+  print("\n----Squad Roster----");
+  print('Squad Size: ' + squad.length);
+  print('First Hero: ' + squad[0].name);
+  print('Last Hero: ' + squad[squad.length - 1].name);
+
+  print("\n----Roll Call----");
+  for (let hero of squad) {
+    print(`${hero.name.padEnd(5)} | Class: ${hero.class}`);
+  }
+
+  //optionA
+  // function checkIfElite()hero{
+  //   if(hero.level >= 5){
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // let eliteSquad = squad.filter(checkIfElite);
+
+ let eliteSquad = squad.filter(hero=> hero.level >=5);
+
+ console.log(eliteSquad);s
+
+  // TODO: Use map() to extract just the names into an array
+  // TODO: Use map() to build a "Name the Class" roster array
+
+
+
+  // === PART 9: The quest board (join) ===
+
+  // TODO: Use join() to turn the names array into a comma-separated string
+  // TODO: Chain map + join to build a formatted roster
+  // TODO: Chain map + join to build an HTML <ul> list
+
+
+
+  // === PART 10: Chain it all together ===
+
+  // TODO: filter + sort + map + join in one chain
+  // CHALLENGE: Build a support roster — heroes with attack < 30
+
+
+
+  </script>
+</body>
+</html>
