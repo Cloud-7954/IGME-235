@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>web-apps-ex-8</title>
+</head>
+<body>
+<script>
+"use strict";
+
+let cars = [
+	{make:"Toyota",	year:2015},
+	{make:"Jeep",	year:1946},
+	{make:"Ford",	year:2017},
+	{make:"Tesla",	year:2018},
+	{make:"Fiat",	year:1982},
+	{make:"Dodge",	year:1970},
+	{make:"Chevy",	year:1957},
+];
+
+let classicCars = cars.filter(car => car.year <= 1970);
+
+let sortedByYear = [...cars].sort((a, b) => a.year - b.year);
+
+let newerYearsOnly = cars
+    .map(car => {
+        if (car.year >= 2010) {
+            return car.year;
+        }
+    })
+    .filter(year => Number.isInteger(year));
+debugger;
+
+</script>
+</body>
+</html>

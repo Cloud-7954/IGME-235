@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Game Settings</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 2rem;
+      max-width: 500px;
+    }
+    h1 { color: #e94560; }
+    label { display: block; margin-top: 1rem; font-size: 1.1rem; }
+    input, select {
+      padding: 0.4rem;
+      font-size: 1rem;
+      margin-top: 0.3rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #status { margin-top: 1.5rem; color: #0f0; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h1>Game Settings</h1>
+
+  <label>Player Name:
+    <input type="text" id="nameField">
+  </label>
+
+  <label>Theme Color:
+    <select id="colorSelect">
+      <option value="#1a1a2e">Dark Blue</option>
+      <option value="#2d132c">Dark Purple</option>
+      <option value="#1a2e1a">Dark Green</option>
+      <option value="#2e1a1a">Dark Red</option>
+    </select>
+  </label>
+
+  <p id="status"></p>
+
+  <hr>
+  <h2>High Scores</h2>
+  <button id="addScore">Add Random Score</button>
+  <button id="clearScores">Clear Scores</button>
+  <ol id="scoreList"></ol>
+
+  <script>
+  "use strict";
+
+  // DOM references
+  const nameField = document.querySelector("#nameField");
+  const colorSelect = document.querySelector("#colorSelect");
+  const status = document.querySelector("#status");
+  const addScoreBtn = document.querySelector("#addScore");
+  const clearScoresBtn = document.querySelector("#clearScores");
+  const scoreList = document.querySelector("#scoreList");
+
+  // We'll write everything here together
+
+  </script>
+</body>
+</html>

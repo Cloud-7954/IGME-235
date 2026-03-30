@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Loot Drop</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 2rem;
+      max-width: 600px;
+    }
+    h1 { color: #e94560; }
+    button {
+      padding: 0.6rem 1.5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: #e94560;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin: 0.5rem 0.5rem 0.5rem 0;
+    }
+    button:hover { background: #c73e54; }
+    #lootResult {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border: 2px solid #333;
+      min-height: 80px;
+      border-radius: 8px;
+    }
+    .common { border-color: #888; }
+    .uncommon { border-color: #1eff00; }
+    .rare { border-color: #0070ff; }
+    .legendary { border-color: #ff8000; }
+    #inventory { margin-top: 1rem; }
+    .loot-item { font-size: 1.3rem; margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Loot Drop Generator</h1>
+  <button id="chestBtn">Open Loot Chest</button>
+  <div id="lootResult">Click the button to open a chest...</div>
+  <h2>Inventory</h2>
+  <div id="inventory"></div>
+
+  <script>
+  "use strict";
+
+  // Variables to hold our data
+  let allLoot = [];
+  let inventory = [];
+
+  // DOM references
+  const chestBtn = document.querySelector("#chestBtn");
+  const lootResult = document.querySelector("#lootResult");
+  const inventoryDiv = document.querySelector("#inventory");
+
+  // We'll write the rest together
+
+  </script>
+</body>
+</html>

@@ -21,8 +21,8 @@
          * 
          */
         window.onload = function () {
-            makeSampleMonsters();
-            showMonsters();
+            makeSampleMonsters("Goomba", "#goombas");
+            showMonsters("Boo", "#boos");
         }
 
         /**
@@ -38,26 +38,33 @@
             monsters.push(monster);
             monster = makeGoomba("Alice", 40, 150, 200);
             monsters.push(monster);
+
+            monster = makeBoo("King Boo", 200, 50, 500);
+            monsters.push(monster);
+            monster = makeBoo("Spooky", 50, 60, 200);
+            monsters.push(monster);
         }
 
         /**
          * Function that shows our monsters (just Goombas for now)
          * 
          */
-        function showMonsters() {
-            let goombaList = document.querySelector("#goombas");
+        function showMonsters(targetType, selector) {
+            let listElement = document.querySelector(selector);
 
             for (let i = 0; i < monsters.length; i++) {
-                let liStr = "";
-                let li = document.createElement("li");
+                if (monsters[i].type === targetType) {
+                    let liStr = "";
+                    let li = document.createElement("li");
 
-                for (let key in monsters[i]) {
-                    if (typeof monsters[i][key] !== "function") {
-                        liStr += `<b>${key}:</b> ${monsters[i][key]}<br />`;
+                    for (let key in monsters[i]) {
+                        if (typeof monsters[i][key] !== "function") {
+                            liStr += `<b>${key}:</b> ${monsters[i][key]}<br />`;
+                        }
                     }
+                    li.innerHTML = liStr;
+                    listElement.appendChild(li); 
                 }
-                li.innerHTML = liStr;
-                goombaList.appendChild(li);
             }
         }
 
@@ -67,6 +74,7 @@
          */
         function createBaseMonster() {
             return {
+                type: "",
                 name: "",
                 hp: 100,
                 speed: 10,
@@ -83,6 +91,7 @@
          */
         function makeGoomba(name, hp, speed, score) {
             let goomba = createBaseMonster();
+            goomba.type = "Goomba";
             goomba.name = name;
             goomba.hp = hp;
             goomba.speed = speed;
@@ -94,6 +103,22 @@
 
             Object.seal(goomba);
             return goomba;
+        }
+
+        function makeBoo(name, hp, speed, score) {
+            let boo = createBaseMonster();
+            boo.type = "Boo";
+            boo.name = name;
+            boo.hp = hp;
+            boo.speed = speed;
+            boo.score = score;
+            boo.takeDamage = function (dmgVal) {
+                boo.hp -= dmgVal;
+            }
+            boo.powerUp = powerUp;
+
+            Object.seal(boo);
+            return boo;
         }
 
         /**
@@ -113,6 +138,9 @@
     <div id="lineUp">
         <h1>Goombas</h1>
         <ul id="goombas">
+        </ul>
+        <h1>Boos</h1>
+        <ul id="boos">
         </ul>
     </div>
 </body>

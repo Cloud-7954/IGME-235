@@ -1,0 +1,16 @@
+{
+  "lootTable": [
+    { "name": "Rusty Sword", "type": "weapon", "rarity": "common", "value": 5, "emoji": "🗡️" },
+    { "name": "Iron Shield", "type": "armor", "rarity": "common", "value": 12, "emoji": "🛡️" },
+    { "name": "Health Potion", "type": "consumable", "rarity": "common", "value": 8, "emoji": "🧪" },
+    { "name": "Elven Bow", "type": "weapon", "rarity": "uncommon", "value": 45, "emoji": "🏹" },
+    { "name": "Shadow Cloak", "type": "armor", "rarity": "uncommon", "value": 60, "emoji": "🧥" },
+    { "name": "Fire Scroll", "type": "consumable", "rarity": "uncommon", "value": 35, "emoji": "📜" },
+    { "name": "Mana Crystal", "type": "consumable", "rarity": "uncommon", "value": 50, "emoji": "💎" },
+    { "name": "Dragon Fang Blade", "type": "weapon", "rarity": "rare", "value": 150, "emoji": "⚔️" },
+    { "name": "Phoenix Feather Armor", "type": "armor", "rarity": "rare", "value": 200, "emoji": "🔥" },
+    { "name": "Staff of Eternity", "type": "weapon", "rarity": "legendary", "value": 500, "emoji": "✨" },
+    { "name": "Crown of the Forgotten King", "type": "armor", "rarity": "legendary", "value": 750, "emoji": "👑" },
+    { "name": "Void Stone", "type": "consumable", "rarity": "legendary", "value": 999, "emoji": "🌀" }
+  ]
+}
