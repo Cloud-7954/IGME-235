@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAWG API Test</title>
+</head>
+<body>
+    <h1>RAWG API Proof of Concept</h1>
+    <p>Searching for "cyberpunk"...</p>
+    <div id="results">Loading data...</div>
+
+    <script>
+        const apiKey = "eda4ea3c405d46ac97f0bd43b3afd243"; 
+        const searchTerm = "cyberpunk";
+        const url = `https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`;
+
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.querySelector("#results");
+                resultsDiv.innerHTML = ""; 
+                for(let i = 0; i < 3; i++) {
+                    let gameName = data.results[i].name;
+                    let p = document.createElement("p");
+                    p.innerHTML = `Game Found: <strong>${gameName}</strong>`;
+                    resultsDiv.appendChild(p);
+                }
+            })
+            .catch(error => {
+                document.querySelector("#results").innerHTML = "Error loading API!";
+            });
+    </script>
+</body>
+</html>
