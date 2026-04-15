@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find What To Play</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Find What To Play</h1>
+        
+        <div class="controls-container">
+            <div class="control-group">
+                <label for="platform">Platform</label>
+                <select id="platform">
+                    <option value="">All Platforms</option>
+                    <option value="1">PC</option>
+                    <option value="2,3,7">Console</option> 
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="sort">Sort By</label>
+                <select id="sort">
+                    <option value="">Best Match (Relevance)</option>
+                    <option value="-metacritic">Top Rated (Metacritic)</option>
+                    <option value="-released">Newest Releases</option>
+                </select>
+            </div>
+
+            <div class="control-group search-group">
+                <input type="text" id="search-term" placeholder="Search a game...">
+                <button id="search-btn">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2 id="status">Loading...</h2>
+        <div id="game-grid" class="grid-container">
+            </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
