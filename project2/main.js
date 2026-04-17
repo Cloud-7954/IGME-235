@@ -1,168 +1,221 @@
-// my api key
+// api setup
 const API_KEY = "eda4ea3c405d46ac97f0bd43b3afd243";
 const BASE_URL = "https://api.rawg.io/api/games";
+const today = "2026-04-17"; 
 
-// get today to block future games
-const today = new Date().toISOString().split('T')[0];
+// state tracking
+let currentPage = 1;
+let savedBaseUrl = ""; 
 
-window.onload = () => {
-    initApp();
-};
-
-// start the app
-function initApp() {
-    // grab last search
-    const savedTerm = localStorage.getItem("lastSearchTerm");
-    if (savedTerm) {
-        document.querySelector("#search-term").value = savedTerm;
+// setup page
+window.onload = function() {
+    let savedWord = localStorage.getItem("lastSearchTerm");
+    if (savedWord !== null) {
+        document.querySelector("#search-term").value = savedWord;
     }
 
-    // click to search
-    document.querySelector("#search-btn").addEventListener("click", handleSearch);
+    document.querySelector("#search-btn").addEventListener("click", startSearch);
+    document.querySelector("#logo").addEventListener("click", loadHome);
+    document.querySelector("#prev-btn").addEventListener("click", goPrevPage);
+    document.querySelector("#next-btn").addEventListener("click", goNextPage);
 
-    // show trending first
-    loadTrendingGames();
+    loadHome();
+};
+
+// load trending
+function loadHome() {
+    document.querySelector("#search-term").value = "";
+    document.querySelector("#status").innerHTML = "Trending Games Today";
+    currentPage = 1;
+
+    let limit = document.querySelector("#limit").value;
+    
+    savedBaseUrl = BASE_URL + "?key=" + API_KEY + "&dates=2025-10-01," + today + "&ordering=-added&page_size=" + limit;
+    
+    getData(savedBaseUrl + "&page=" + currentPage);
 }
 
-// load hot games
-function loadTrendingGames() {
-    document.querySelector("#status").innerHTML = "Trending Games This Month (Alphabetical)";
-    
-    // get recent games
-    const url = `${BASE_URL}?key=${API_KEY}&dates=2025-10-01,${today}&ordering=-added&page_size=15`;
-    
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            // sort a to z
-            const sortedGames = data.results.sort((a, b) => a.name.localeCompare(b.name));
-            displayResults(sortedGames);
-        })
-        .catch(error => {
-            document.querySelector("#status").innerHTML = "Error loading data.";
-        });
-}
+// run search
+function startSearch() {
+    let term = document.querySelector("#search-term").value;
+    let platform = document.querySelector("#platform").value;
+    let sort = document.querySelector("#sort").value;
+    let limit = document.querySelector("#limit").value;
 
-// do the search
-function handleSearch() {
-    // grab inputs
-    const term = document.querySelector("#search-term").value.trim();
-    const platform = document.querySelector("#platform").value;
-    const sort = document.querySelector("#sort").value;
-
-    // stop if empty
-    if (!term && !platform && !sort) {
+    // check empty
+    if (term === "" && platform === "" && sort === "") {
         document.querySelector("#status").innerHTML = "Please enter a search term or select a filter!";
         return;
     }
 
-    // save it
-    if (term) {
+    // save search
+    if (term !== "") {
         localStorage.setItem("lastSearchTerm", term);
     }
 
     document.querySelector("#status").innerHTML = "Searching...";
+    currentPage = 1; 
 
     // build url
-    let searchUrl = `${BASE_URL}?key=${API_KEY}&page_size=20`;
+    let url = BASE_URL + "?key=" + API_KEY + "&page_size=" + limit;
     
-    if (term) {
-        searchUrl += `&search=${encodeURIComponent(term)}`;
+    if (term !== "") {
+        url = url + "&search=" + term;
     }
-    
-    // add platform
-    if (platform) {
-        searchUrl += `&parent_platforms=${platform}`;
+    if (platform !== "") {
+        url = url + "&parent_platforms=" + platform;
     }
-    
-    // add sort
-    if (sort) {
-        searchUrl += `&ordering=${sort}`;
-        // fix the future games bug
-        if (sort === '-released') {
-            searchUrl += `&dates=1990-01-01,${today}`;
+    if (sort !== "") {
+        url = url + "&ordering=" + sort;
+        if (sort === "-released") {
+            url = url + "&dates=1990-01-01," + today;
         }
     }
 
-    // go get data
-    fetch(searchUrl)
-        .then(response => response.json())
-        .then(data => {
-            document.querySelector("#status").innerHTML = `Found ${data.count} Results`;
-            displayResults(data.results);
+    savedBaseUrl = url;
+    getData(savedBaseUrl + "&page=" + currentPage);
+}
+
+// page back
+function goPrevPage() {
+    currentPage = currentPage - 1;
+    document.querySelector("#status").innerHTML = "Loading Page " + currentPage + "...";
+    getData(savedBaseUrl + "&page=" + currentPage);
+    window.scrollTo(0, 0); 
+}
+
+// page forward
+function goNextPage() {
+    currentPage = currentPage + 1;
+    document.querySelector("#status").innerHTML = "Loading Page " + currentPage + "...";
+    getData(savedBaseUrl + "&page=" + currentPage);
+    window.scrollTo(0, 0);
+}
+
+// get data
+function getData(url) {
+    fetch(url)
+        .then(function(response) {
+            return response.json();
         })
-        .catch(error => {
-            document.querySelector("#status").innerHTML = "Error loading data.";
+        .then(function(data) {
+            let term = document.querySelector("#search-term").value;
+            if (term !== "") {
+                document.querySelector("#status").innerHTML = "Found " + data.count + " Results";
+            } else {
+                document.querySelector("#status").innerHTML = "Trending Games Today";
+            }
+            
+            showGames(data.results);
+            setupPagination(data);
+        })
+        .catch(function(error) {
+            document.querySelector("#status").innerHTML = "Error loading data. Please check your connection.";
         });
 }
 
-// show games on page
-function displayResults(games) {
-    const grid = document.querySelector("#game-grid");
-    // clear old stuff
+// button logic
+function setupPagination(data) {
+    let paginationDiv = document.querySelector("#pagination");
+    let prevBtn = document.querySelector("#prev-btn");
+    let nextBtn = document.querySelector("#next-btn");
+    let pageNum = document.querySelector("#page-num");
+
+    if (data.count === 0) {
+        paginationDiv.classList.add("hidden");
+        return;
+    }
+
+    paginationDiv.classList.remove("hidden");
+    pageNum.innerHTML = "Page " + currentPage;
+
+    if (currentPage === 1) {
+        prevBtn.disabled = true;
+    } else {
+        prevBtn.disabled = false;
+    }
+
+    if (data.next === null) {
+        nextBtn.disabled = true;
+    } else {
+        nextBtn.disabled = false;
+    }
+}
+
+// draw cards
+function showGames(games) {
+    let grid = document.querySelector("#game-grid");
     grid.innerHTML = ""; 
 
-    // if nothing found
     if (games.length === 0) {
         grid.innerHTML = "<p>No games found matching your criteria.</p>";
         return;
     }
 
-    // loop games
-    for (let game of games) {
-        const card = document.createElement("div");
+    for (let i = 0; i < games.length; i++) {
+        let game = games[i];
+
+        let card = document.createElement("div");
         card.className = "game-card";
 
-        // cover pic
-        const img = document.createElement("img");
-        img.src = game.background_image ? game.background_image : "https://via.placeholder.com/400x200?text=No+Cover";
+        // cover image
+        let img = document.createElement("img");
+        if (game.background_image !== null) {
+            img.src = game.background_image;
+        } else {
+            img.src = "https://via.placeholder.com/400x200?text=No+Cover";
+        }
         img.alt = game.name;
 
-        const infoDiv = document.createElement("div");
+        let infoDiv = document.createElement("div");
         infoDiv.className = "info";
 
-        // name
-        const title = document.createElement("h3");
+        let title = document.createElement("h3");
         title.innerHTML = game.name;
 
-        // genres
-        const genreList = document.createElement("p");
-        if (game.genres && game.genres.length > 0) {
-            genreList.innerHTML = game.genres.map(g => g.name).join(", ");
+        // get genres
+        let genreList = document.createElement("p");
+        let genreString = "";
+        
+        if (game.genres !== null && game.genres.length > 0) {
+            for (let j = 0; j < game.genres.length; j++) {
+                genreString = genreString + game.genres[j].name;
+                if (j < game.genres.length - 1) {
+                    genreString = genreString + ", ";
+                }
+            }
+            genreList.innerHTML = genreString;
         } else {
             genreList.innerHTML = "Genre: Unknown";
         }
 
-        // scores
-        const scoreBadge = document.createElement("div");
+        // get scores
+        let scoreBadge = document.createElement("div");
         scoreBadge.className = "score-badge";
         
-        // meta score first
-        if (game.metacritic) {
-            scoreBadge.innerHTML = `Metacritic: ${game.metacritic}`;
-            if (game.metacritic >= 75) scoreBadge.classList.add("meta-high");
-            else if (game.metacritic >= 50) scoreBadge.classList.add("meta-mid");
-            else scoreBadge.classList.add("meta-low");
-        } 
-        // fallback to user score
-        else if (game.rating > 0) {
-            scoreBadge.innerHTML = `User Score: ${game.rating}/5`;
+        if (game.metacritic !== null) {
+            scoreBadge.innerHTML = "Metacritic: " + game.metacritic;
+            if (game.metacritic >= 75) {
+                scoreBadge.classList.add("meta-high");
+            } else if (game.metacritic >= 50) {
+                scoreBadge.classList.add("meta-mid");
+            } else {
+                scoreBadge.classList.add("meta-low");
+            }
+        } else if (game.rating > 0) {
+            scoreBadge.innerHTML = "User Score: " + game.rating + "/5";
             scoreBadge.classList.add("user-score");
-        } 
-        // no score
-        else {
+        } else {
             scoreBadge.innerHTML = "Unrated";
             scoreBadge.classList.add("no-score");
         }
 
-        // put together
         infoDiv.appendChild(title);
         infoDiv.appendChild(genreList);
         infoDiv.appendChild(scoreBadge); 
         card.appendChild(img);
         card.appendChild(infoDiv);
         
-        // append
         grid.appendChild(card);
     }
 }

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find What To Play</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Find What To Play</h1>
+        <h1 id="logo" title="Return to Home">FIND WHAT TO PLAY</h1>
         
         <div class="controls-container">
             <div class="control-group">
@@ -29,6 +30,16 @@
                 </select>
             </div>
 
+            <div class="control-group">
+                <label for="limit">Show Results</label>
+                <select id="limit">
+                    <option value="5">5</option>
+                    <option value="15" selected>15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+
             <div class="control-group search-group">
                 <input type="text" id="search-term" placeholder="Search a game...">
                 <button id="search-btn">Search</button>
@@ -37,9 +48,16 @@
     </header>
 
     <main>
-        <h2 id="status">Loading...</h2>
+        <h2 id="status">Loading data...</h2>
+        
         <div id="game-grid" class="grid-container">
             </div>
+
+        <div id="pagination" class="pagination-container hidden">
+            <button id="prev-btn">Previous</button>
+            <span id="page-num">Page 1</span>
+            <button id="next-btn">Next</button>
+        </div>
     </main>
 
     <script src="main.js"></script>

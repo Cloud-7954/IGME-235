@@ -1,6 +1,6 @@
 :root {
-    --bg-dark: #0f172a;     
-    --card-bg: #1e293b;      
+    --bg-dark: #0f172a;       
+    --card-bg: #1e293b;       
     --text-main: #f8fafc;     
     --text-muted: #94a3b8;    
     --accent-color: #0ea5e9;  
@@ -14,13 +14,12 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; 
     background-color: var(--bg-dark);
     color: var(--text-main);
     padding: 30px 5%;
     line-height: 1.6;
 }
-
 
 header {
     background: rgba(30, 41, 59, 0.7); 
@@ -32,13 +31,21 @@ header {
     margin-bottom: 30px;
 }
 
-h1 {
+/* Make Logo Clickable */
+#logo {
     font-size: 2rem;
     font-weight: 800;
     letter-spacing: 1px;
     margin-bottom: 20px;
     color: var(--text-main);
     text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+#logo:hover {
+    color: var(--accent-color);
 }
 
 .controls-container {
@@ -84,7 +91,6 @@ select:focus, input:focus {
     margin-left: auto; 
 }
 
-
 button {
     background-color: var(--accent-color);
     color: white;
@@ -104,6 +110,13 @@ button:hover {
     box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
 }
 
+button:disabled {
+    background-color: #334155;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
 
 #status {
     font-size: 1.2rem;
@@ -176,3 +189,20 @@ button:hover {
 .meta-low { background-color: #ef4444; }  
 .user-score { background-color: #6366f1; } 
 .no-score { background-color: #475569; color: #cbd5e1; }
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.pagination-container span {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.hidden {
+    display: none !important;
+}
