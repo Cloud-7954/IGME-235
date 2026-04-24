@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Blackjack Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="dealer-area">
+            <h2>Dealer: <span id="dealer-score">?</span></h2>
+            <div id="dealer-cards" class="card-container"></div>
+        </div>
+
+        <div id="message-area">Welcome! Click 'Deal' to start.</div>
+
+        <div id="player-area">
+            <div id="hands-wrapper" class="hands-wrapper"></div>
+        </div>
+
+        <div id="controls">
+            <button id="btn-deal">Deal</button>
+            <button id="btn-hit" disabled>Hit</button>
+            <button id="btn-stand" disabled>Stand</button>
+            <button id="btn-split" disabled style="display: none;">Split</button>
+        </div>
+    </div>
+
+    <script src="classes.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -33,7 +33,14 @@
     <img src="websketch.jpg" alt="Gameplay Mockup" width="400">
 
     <h2>Other Technical Details</h2>
-    <p>Built entirely using JavaScript and the Browser DOM.</p>
+    <div class="tech-list">
+        <p>Built entirely using <strong>JavaScript and the Browser DOM</strong>, strictly adhering to the prohibition of the Canvas 2D API. The project architecture utilizes ES6 Classes to maintain a clean codebase and Separation of Concerns.</p>
+        <ul>
+            <li><strong>Fairness & Probability:</strong> The game utilizes a programmatically generated 52-card deck. Each round begins with a fresh deck randomized via the <strong>Fisher-Yates shuffle algorithm</strong>, ensuring 100% fair and unbiased probability mirroring a real-life deck.</li>
+            <li><strong>State Management:</strong> The dealer's "hole card" is managed through boolean game states. CSS classes are dynamically toggled to reveal or hide card values and textures based on the game's progress.</li>
+            <li><strong>Memory Safety:</strong> Drawing cards employs array <code>pop()</code> operations, ensuring that once a card is drawn, it is physically removed from the deck, preventing any duplicate cards within a single round.</li>
+        </ul>
+    </div>
 
     
 

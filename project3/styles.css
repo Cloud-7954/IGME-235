@@ -1,0 +1,114 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('background.jpg'); 
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#game-container {
+    width: 100%;
+    max-width: 900px;
+    height: 100vh; 
+    padding: 40px 20px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+h2, #message-area {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.8);
+    margin: 0 0 10px 0;
+}
+
+#message-area {
+    font-size: 26px;
+    color: #FFD700;
+    margin: auto 0; 
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-height: 120px;
+}
+
+.card {
+    width: 80px;
+    height: 110px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+}
+
+.card.red { color: #e74c3c; }
+
+.card.hidden {
+    background-color: #000080;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+    color: transparent;
+}
+
+.hands-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.hand-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.hand-box.active-hand {
+    border-color: #FFD700;
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+#controls {
+    margin-top: 10px;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1c40f;
+    color: #333;
+    font-weight: bold;
+}
+
+button:hover:not(:disabled) {
+    background-color: #f39c12;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #7f8c8d;
+    color: #bdc3c7;
+    cursor: not-allowed;
+}
