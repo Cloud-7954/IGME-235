@@ -18,11 +18,29 @@ body {
     width: 100%;
     max-width: 900px;
     height: 100vh; 
-    padding: 40px 20px; 
+    padding: 20px 20px; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
+}
+
+/* --- 筹码记分板 (Dashboard) --- */
+#dashboard {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.chip-info {
+    font-size: 22px;
+    font-weight: bold;
+    color: #FFD700;
 }
 
 h2, #message-area {
@@ -68,7 +86,7 @@ h2, #message-area {
 .hands-wrapper {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 30px; 
 }
 
 .hand-box {
@@ -86,9 +104,7 @@ h2, #message-area {
     background-color: rgba(0, 0, 0, 0.4); 
 }
 
-#controls {
-    margin-top: 10px;
-}
+#controls { margin-top: 10px; }
 
 button {
     font-size: 18px;
@@ -111,4 +127,13 @@ button:disabled {
     background-color: #7f8c8d;
     color: #bdc3c7;
     cursor: not-allowed;
+}
+
+/* 特殊危险按钮样式（比如 All In 和 Reset） */
+#btn-all-in, #btn-next-round {
+    background-color: #e74c3c;
+    color: white;
+}
+#btn-all-in:hover:not(:disabled), #btn-next-round:hover:not(:disabled) {
+    background-color: #c0392b;
 }

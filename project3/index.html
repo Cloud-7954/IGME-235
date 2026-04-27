@@ -7,22 +7,39 @@
 </head>
 <body>
     <div id="game-container">
+        <div id="dashboard">
+            <div class="chip-info">Bankroll: $<span id="bankroll-text">500</span></div>
+            <div class="chip-info">Current Bet: $<span id="bet-text">0</span></div>
+        </div>
+        
         <div id="dealer-area">
             <h2>Dealer: <span id="dealer-score">?</span></h2>
             <div id="dealer-cards" class="card-container"></div>
         </div>
 
-        <div id="message-area">Welcome! Click 'Deal' to start.</div>
+        <div id="message-area">Welcome! Place your bets.</div>
 
         <div id="player-area">
             <div id="hands-wrapper" class="hands-wrapper"></div>
         </div>
 
         <div id="controls">
-            <button id="btn-deal">Deal</button>
-            <button id="btn-hit" disabled>Hit</button>
-            <button id="btn-stand" disabled>Stand</button>
-            <button id="btn-split" disabled style="display: none;">Split</button>
+            <div id="betting-controls">
+                <button id="btn-bet-10">+ $10</button>
+                <button id="btn-all-in">All In</button>
+                <button id="btn-clear-bet">Clear</button>
+                <button id="btn-deal" disabled>Deal</button>
+            </div>
+            
+            <div id="action-controls" style="display: none;">
+                <button id="btn-hit">Hit</button>
+                <button id="btn-stand">Stand</button>
+                <button id="btn-split" style="display: none;">Split</button>
+            </div>
+
+            <div id="round-controls" style="display: none;">
+                <button id="btn-next-round">Next Round</button>
+            </div>
         </div>
     </div>
 
