@@ -2,47 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project 3 Proposal - Web Blackjack</title>
+    <title>Project 3 - Web Blackjack Proposal & Documentation</title>
 </head>
 <body>
 
-    <h1>Web Blackjack - Project Proposal</h1>
+    <h1>Web Blackjack - Proposal & Documentation</h1>
 
     <h2>High Concept</h2>
-    <p>A classic, browser-based interactive Blackjack game where the player challenges the dealer. Players must strategically manage their chips and decide when to hit, stand, double down, or surrender.</p>
+    <p>A classic, browser-based interactive Blackjack game where the player challenges the dealer. Players must strategically manage their bankroll and decide when to hit, stand, or split to build a hand closer to 21 than the dealer without busting.</p>
 
     <h2>Genre</h2>
     <p>Tabletop / Casino Card Game</p>
 
     <h2>Platform</h2>
-    <p>Desktop Web</p>
+    <p>Desktop Web (Optimized for modern browser environments).</p>
 
     <h2>Story</h2>
-    <p>The experience is purely abstract and mechanics-driven, replicating a classic casino table.</p>
+    <p>The experience is purely abstract and mechanics-driven, replicating the professional, high-stakes atmosphere of a classic casino table.</p>
 
     <h2>Aesthetics</h2>
-    <p>A clean, classic casino aesthetic with a green felt table background, readable custom playing cards, and clearly labeled UI buttons. Sound effects will be used for dealing cards and chip interactions.</p>
+    <p>The game features a clean casino aesthetic with a green felt table. It uses readable custom playing cards and clearly labeled UI widgets. To enhance immersion, it includes a looping Jazz background track and tactile sound effects for dealing, betting, and winning.</p>
 
     <h2>Gameplay</h2>
-    <p>Players start with a pool of chips. The game follows standard Blackjack dealing order. Players can choose to Hit, Stand, Double Down, or Surrender. The dealer must hit on a soft 17.</p>
+    <p>Players start with a <strong>$500 bankroll</strong>. Before each round, players use a dedicated betting menu to place $10 increments or go "All In." The game follows standard professional rules:</p>
+    <ul>
+        <li><strong>Actions:</strong> Hit, Stand, or Split (if cards are of identical value).</li>
+        <li><strong>Dealer Rules:</strong> Dealer must hit on a soft 17.</li>
+        <li><strong>Payouts:</strong> Standard wins pay 1:1, and a natural Blackjack pays 3:2.</li>
+    </ul>
 
     <h2>Mockups</h2>
     <p>Initial sketches of the start screen and gameplay layout:</p>
-    <img src="bjweb.webp" alt="Start Screen Mockup" width="400">
-    <br><br>
-    <img src="websketch.jpg" alt="Gameplay Mockup" width="400">
+    <img src="bjweb.webp" alt="Start Screen Mockup" width="500">
+    <br><br><br><br>
+    <img src="websketch.jpg" alt="Gameplay Layout Sketch" width="500" style="transform: rotate(-90deg); margin: 50px 0;">
 
     <h2>Other Technical Details</h2>
-    <div class="tech-list">
-        <p>Built entirely using <strong>JavaScript and the Browser DOM</strong>, strictly adhering to the prohibition of the Canvas 2D API. The project architecture utilizes ES6 Classes to maintain a clean codebase and Separation of Concerns.</p>
-        <ul>
-            <li><strong>Fairness & Probability:</strong> The game utilizes a programmatically generated 52-card deck. Each round begins with a fresh deck randomized via the <strong>Fisher-Yates shuffle algorithm</strong>, ensuring 100% fair and unbiased probability mirroring a real-life deck.</li>
-            <li><strong>State Management:</strong> The dealer's "hole card" is managed through boolean game states. CSS classes are dynamically toggled to reveal or hide card values and textures based on the game's progress.</li>
-            <li><strong>Memory Safety:</strong> Drawing cards employs array <code>pop()</code> operations, ensuring that once a card is drawn, it is physically removed from the deck, preventing any duplicate cards within a single round.</li>
-        </ul>
-    </div>
+    <ul>
+        <li><strong>Fairness & Probability:</strong> Uses a randomized 52-card deck .</li>
+        <li><strong>Dynamic Difficulty Adjustment (DDA):</strong> Implemented a "Player Retention Algorithm" that subtly adjusts the card draw probability if a player faces a long losing streak to manage player engagement.</li>
+        <li><strong>Audio Engine:</strong> Uses an event-based sound system to trigger specific MP3 files for different actions (e.g., betting, dealing, winning) without overlapping issues.</li>
+    </ul>
 
     
+
+    <h2>VI. Documentation</h2>
+    
+    <p><strong>Development Process:</strong></p>
+    <p>The project began with the creation of the core logic classes (Card and Deck). Once the fundamental Blackjack rules were functional, I focused on building a robust state machine to handle the betting phase, player actions, and dealer logic. A major technical hurdle was implementing the <strong>Split</strong> functionality, which required refactoring the player's hand into an array of arrays to allow independent action and scoring for multiple hands. Finally, I integrated an audio engine and a DDA system to enhance the professional feel and player retention.</p>
+
+    <p><strong>Requirements Met:</strong></p>
+    <ul>
+        <li><strong>ES6 Classes:</strong> Utilized <code>Card</code> and <code>Deck</code> classes to encapsulate data and behaviors.</li>
+        <li><strong>D.R.Y. & Separation:</strong> Code is separated into <code>classes.js</code>, <code>main.js</code>, and <code>styles.css</code>. Functional blocks are modularized (e.g., <code>calculateScore</code>, <code>updateUI</code>).</li>
+        <li><strong>DOM Traversal:</strong> Exclusively used <code>querySelector</code> for all UI bindings.</li>
+        <li><strong>No Canvas 2D:</strong> All card rendering and layout are handled through dynamic DOM manipulation and CSS Flexbox.</li>
+        <li><strong>Media:</strong> Integrated 7+ unique sound effects and a background music track. All images (backgrounds/mockups) are optimized for web delivery.</li>
+    </ul>
+
+    <p><strong>Sources:</strong></p>
+    <ul>
+        <li>Background Image: https://www.istockphoto.com/illustrations/blackjack-table-background</li>
+        <li>Sound Effects: https://pixabay.com/sound-effects/search/winning/?pagi=2</li>
+    </ul>
 
 </body>
 </html>

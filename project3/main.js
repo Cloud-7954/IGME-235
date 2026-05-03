@@ -1,18 +1,32 @@
-// main.js
+const bgm = new Audio('bgm.mp3');
+bgm.loop = true;
+bgm.volume = 0.4;
 
-// --- 游戏状态变量 ---
+let bgmStarted = false;
+// start bgm after click
+document.body.addEventListener('click', () => {
+    if (!bgmStarted) {
+        bgm.play().catch(e => {}); 
+        bgmStarted = true;
+    }
+}, { once: true });
+
+// play sound helper function
+function playSound(filename) {
+    let audio = new Audio(filename);
+    audio.play().catch(e => {}); 
+}
+
+
 let deck;
 let playerHands = []; 
 let currentHandIndex = 0; 
 let dealerHand = [];
 let gameIsOver = false;
-
-// --- 筹码系统与暗改(DDA)变量 ---
 let bankroll = 500;
 let currentBet = 0; 
-let consecutiveLosses = 0; // 核心：连输计数器
+let consecutiveLosses = 0;
 
-// --- DOM 元素获取 ---
 const dealerCardsContainer = document.querySelector('#dealer-cards');
 const handsWrapper = document.querySelector('#hands-wrapper');
 const dealerScoreText = document.querySelector('#dealer-score');
@@ -34,19 +48,25 @@ const btnStand = document.querySelector('#btn-stand');
 const btnSplit = document.querySelector('#btn-split');
 const btnNextRound = document.querySelector('#btn-next-round');
 
-// --- 事件监听 ---
-btnBet10.addEventListener('click', () => placeBet(10));
-btnAllIn.addEventListener('click', () => placeBet(bankroll));
+btnBet10.addEventListener('click', () => placeBet(10, 'ButtonPressed.mp3'));
+btnAllIn.addEventListener('click', () => placeBet(bankroll, 'Allin.mp3'));
+
 btnClearBet.addEventListener('click', clearBet);
 btnDeal.addEventListener('click', startNewGame);
 btnHit.addEventListener('click', playerHit);
 btnStand.addEventListener('click', playerStand);
 btnSplit.addEventListener('click', playerSplit);
-btnNextRound.addEventListener('click', resetPhase);
+btnNextRound.addEventListener('click', () => {
+    playSound('ButtonPressed.mp3'); // sound for next round
+    resetPhase();
+});
 
-// --- 筹码逻辑 ---
-function placeBet(amount) {
+
+
+// allin/10 bet placement with sound
+function placeBet(amount, soundFile) {
     if (bankroll >= amount && amount > 0) {
+        playSound(soundFile); 
         bankroll -= amount; 
         currentBet += amount;
         updateDashboard();
@@ -54,24 +74,28 @@ function placeBet(amount) {
     }
 }
 
+// returns the current bet
 function clearBet() {
+    playSound('clear.mp3'); // clear bet audio
     bankroll += currentBet; 
     currentBet = 0;
     updateDashboard();
     btnDeal.disabled = true;
 }
 
+// bankroll and bet display update
 function updateDashboard() {
     bankrollText.textContent = bankroll;
     betText.textContent = currentBet;
 }
 
-// --- 游戏主循环 ---
 
+// main game loop
+// resets the board and ui
 function resetPhase() {
     if (bankroll === 0) {
         bankroll = 500; 
-        consecutiveLosses = 0; // 破产重置时，连输也清零
+        consecutiveLosses = 0; 
     }
     
     currentBet = 0;
@@ -92,63 +116,49 @@ function resetPhase() {
     btnClearBet.disabled = false;
 }
 
-// --- 核心暗改逻辑：从牌堆中定向抽牌 ---
+// secretly pull a specific better card 
 function pullSpecificCard(conditionFn) {
-    // 在当前牌堆中寻找符合条件的牌
     let index = deck.cards.findIndex(conditionFn);
     if (index !== -1) {
-        // 如果找到了，就把它从牌堆中间抽出来（避免发出重复牌）
         return deck.cards.splice(index, 1)[0]; 
     }
-    // 如果牌堆里实在没有这种牌了（极小概率），就正常发最上面的一张
     return deck.drawCard(); 
 }
 
+// new round and deals the first cards
 function startNewGame() {
+    playSound('card2.mp3'); // deal card
     bettingControls.style.display = 'none';
     actionControls.style.display = 'block';
     
-    deck = new Deck(); // 正常洗牌
+    deck = new Deck(); 
     playerHands = [ [] ]; 
     currentHandIndex = 0;
     dealerHand = [];
     gameIsOver = false;
 
-    // --- Dynamic Difficulty Adjustment (DDA) 发牌介入 ---
+    // intervention if lost too many games
     let pCard1, pCard2;
-
     if (consecutiveLosses >= 5) {
-        // 连输5把及以上：强行做牌，极大概率天生 Blackjack (一张A + 一张10点牌)
-        console.log("DDA Triggered: Level 3 (Blackjack Forced)"); // 开发调试用，交作业前记得删
         pCard1 = pullSpecificCard(c => c.value === 'A');
         pCard2 = pullSpecificCard(c => ['10', 'J', 'Q', 'K'].includes(c.value));
-    } 
-    else if (consecutiveLosses > 3) {
-        // 连输4把：大幅提升拿到 A 的概率
-        console.log("DDA Triggered: Level 2 (Ace Boost)");
+    } else if (consecutiveLosses > 3) {
         pCard1 = pullSpecificCard(c => c.value === 'A');
-        pCard2 = deck.drawCard(); // 第二张顺其自然
-    } 
-    else if (consecutiveLosses === 3) {
-        // 连输3把：必定拿到一张 10 点牌
-        console.log("DDA Triggered: Level 1 (10-Value Boost)");
+        pCard2 = deck.drawCard(); 
+    } else if (consecutiveLosses === 3) {
         pCard1 = pullSpecificCard(c => ['10', 'J', 'Q', 'K'].includes(c.value));
         pCard2 = deck.drawCard();
-    } 
-    else {
-        // 正常发牌
+    } else {
         pCard1 = deck.drawCard();
         pCard2 = deck.drawCard();
     }
 
-    // 随机打乱发给玩家的两张牌的顺序，防止每次都是第一张牌被暗改被看穿
     if (Math.random() > 0.5) {
         playerHands[0].push(pCard1, pCard2);
     } else {
         playerHands[0].push(pCard2, pCard1);
     }
 
-    // 庄家正常发牌
     dealerHand.push(deck.drawCard(), deck.drawCard());
 
     btnHit.disabled = false;
@@ -175,8 +185,10 @@ function startNewGame() {
     checkHandState(); 
 }
 
+// splits the current hand into 2 separate hands
 function playerSplit() {
     if (bankroll < currentBet) return;
+    playSound('card2.mp3'); // split audio
     bankroll -= currentBet;
     updateDashboard();
 
@@ -194,17 +206,22 @@ function playerSplit() {
     checkHandState(); 
 }
 
+// adds a card to the active hand
 function playerHit() {
+    playSound('card2.mp3'); // hit audio
     btnSplit.style.display = 'none'; 
     playerHands[currentHandIndex].push(deck.drawCard());
     updateUI();
     checkHandState();
 }
 
+// ends the players current hand actions
 function playerStand() {
+    playSound('card1.mp3'); // stand/ dealer reveal card
     nextHand();
 }
 
+// busted or reached 21
 function checkHandState() {
     let score = calculateScore(playerHands[currentHandIndex]);
     if (score >= 21) {
@@ -212,6 +229,7 @@ function checkHandState() {
     }
 }
 
+// progresses to  next split hand or ends turn if no hands left
 function nextHand() {
     currentHandIndex++;
     if (currentHandIndex >= playerHands.length) {
@@ -223,6 +241,7 @@ function nextHand() {
     }
 }
 
+// dealers logic after player finishes
 function dealerTurn() {
     btnHit.disabled = true;
     btnStand.disabled = true;
@@ -243,12 +262,12 @@ function dealerTurn() {
     determineWinner();
 }
 
+// compares scores, updates bankroll, displays the outcome
 function determineWinner() {
     const dScore = calculateScore(dealerHand);
     let results = [];
     let totalWinnings = 0;
     
-    // 用于判断这一轮整体算赢了还是输了
     let roundHasWin = false; 
     let roundHasPush = false;
 
@@ -280,14 +299,13 @@ function determineWinner() {
     bankroll += totalWinnings;
     updateDashboard();
 
-    // --- 连输判定器更新 ---
+    // trigger win sound
     if (roundHasWin) {
-        consecutiveLosses = 0; // 只要有一手赢了，连输就断了
+        playSound('win.mp3'); // win audio
+        consecutiveLosses = 0; 
     } else if (!roundHasPush) {
-        // 没有赢，也没有平局，说明纯输
         consecutiveLosses++;
     }
-    // 如果是纯平局，不增加连输计数，保持原状
 
     if (bankroll === 0) {
         results.push("<br><span style='color:#e74c3c; font-size: 30px;'>GG! You are Bankrupt!</span>");
@@ -302,6 +320,7 @@ function determineWinner() {
     roundControls.style.display = 'block';
 }
 
+// best possible score for hand/aces
 function calculateScore(hand) {
     let score = 0;
     let aces = 0;
@@ -316,6 +335,7 @@ function calculateScore(hand) {
     return score;
 }
 
+// current game state to dom
 function updateUI() {
     dealerCardsContainer.innerHTML = '';
     dealerHand.forEach((card, index) => {
@@ -348,5 +368,5 @@ function updateUI() {
     });
 }
 
-// 启动
+//  call to start the game loop
 resetPhase();

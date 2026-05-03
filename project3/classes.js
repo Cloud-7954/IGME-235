@@ -4,12 +4,14 @@ class Card {
         this.value = value;
     }
 
+    // numerical value of the card for scoring
     getScore() {
         if (['J', 'Q', 'K'].includes(this.value)) return 10;
         if (this.value === 'A') return 11; 
         return parseInt(this.value);
     }
 
+    // Creates and returns a visual DOM element (div) representing the card
     createCardElement(isHidden = false) {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
@@ -26,6 +28,7 @@ class Card {
     }
 }
 
+// 52 cards
 class Deck {
     constructor() {
         this.cards = [];
@@ -33,6 +36,7 @@ class Deck {
         this.shuffle();
     }
 
+    // deck with all 52 standard card combinations
     buildDeck() {
         const suits = ['♠', '♥', '♣', '♦'];
         const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -44,6 +48,7 @@ class Deck {
         }
     }
 
+    // randomize the order 
     shuffle() {
         for (let i = this.cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -51,6 +56,7 @@ class Deck {
         }
     }
 
+    // removes and returns the top card from the deck array
     drawCard() {
         return this.cards.pop();
     }
