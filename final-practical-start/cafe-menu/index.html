@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Café Menu Practical</title>
+  <style>
+    /* CSS for this page is mostly provided. There is one small CSS task — see TASK 4 in the #menu-container rule below. */
+    body {
+      font-family: sans-serif;
+      max-width: 720px;
+      margin: 1rem auto;
+      padding: 1rem;
+    }
+    h1 { text-align: center; margin-bottom: 0.25rem; }
+    .stats, .cart {
+      padding: 0.6rem 1rem;
+      background: #eee;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    #menu-container {
+      /* >>> TASK 4 (CSS):
+         After TASK 3 renders the items, you'll see them stacked in a
+         single column. Make this container display its children in a
+         2-column grid with a small gap between items. Add the rules here. */
+
+      margin: 1rem 0;
+    }
+
+    .item {
+      border: 1px solid #999;
+      border-radius: 6px;
+      padding: 0.75rem;
+      cursor: pointer;
+      background: #f8f8f8;
+      transition: background 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item:hover { background: #e8e8e8; }
+    .item-name { font-weight: bold; }
+    .item-price { color: #555; }
+    .cart {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Café Menu</h1>
+  <p>Click an item to add it to your cart.</p>
+
+  <div class="stats">
+    Drinks available: <span id="drink-count">?</span>
+    &nbsp;|&nbsp;
+    Food items available: <span id="food-count">?</span>
+  </div>
+
+  <div id="menu-container">
+    <!-- Menu items will be inserted here by your JS -->
+  </div>
+
+  <div class="cart">
+    <div>Cart total: $<span id="cart-total">0</span></div>
+    <button id="clear-btn">Clear Cart</button>
+  </div>
+
+  <script>
+    // The menu data — DO NOT MODIFY.
+    // Each item is an object with: id (number), name (string),
+    // price (number), and category (string: "drink" or "food").
+    const menu = [
+      { id: 1, name: "Espresso",  price: 3, category: "drink" },
+      { id: 2, name: "Latte",     price: 5, category: "drink" },
+      { id: 3, name: "Tea",       price: 3, category: "drink" },
+      { id: 4, name: "Croissant", price: 4, category: "food" },
+      { id: 5, name: "Bagel",     price: 3, category: "food" },
+      { id: 6, name: "Cookie",    price: 2, category: "food" }
+    ];
+
+    // >>> TASK 1: Get references to the three elements below using the
+    //     two preferred DOM methods we use in this class.
+    //     Do NOT use getElementById or getElementsByClassName.
+    //
+    //     - the #menu-container div  -> store in const menuContainer
+    //     - the #cart-total span     -> store in const cartTotalEl
+    //     - the #clear-btn button    -> store in const clearBtn
+
+
+
+    // >>> TASK 2: Declare a variable named cartTotal to track the running
+    //     cart total. Its initial value should be 0. Use the keyword that
+    //     allows reassignment (since this value will change).
+
+
+
+    // >>> TASK 3: Render the menu items into the page.
+    //
+    //     Loop through the `menu` array. For each item, build an HTML
+    //     string using a template literal (backticks). Each item should
+    //     end up looking like this in the DOM:
+    //
+    //       <div class="item" data-id="1" data-price="3">
+    //         <span class="item-name">Espresso</span>
+    //         <span class="item-price">$3</span>
+    //       </div>
+    //
+    //     Then put the resulting HTML inside menuContainer so all items
+    //     show up in the page.
+    //
+    //     Tip: Either a `for` loop OR an array method like
+    //     .map().join('') works here. If you're unsure, the for-loop
+    //     + string concatenation pattern from the GIF Finder lab is
+    //     the most direct path.
+    //
+    //     >>> Heads up: in TASK 5 you'll need to attach click handlers
+    //     to each item. Plan your render approach accordingly.
+    //
+    //     >>> Important: make sure each item's data-price reflects THAT
+    //     item's price — don't hardcode a single value. Test by clicking
+    //     different items in the next task and confirming the math.
+
+
+
+    // >>> TASK 5: The iteration + click listener boilerplate is provided
+    //     below. Inside the listener, fill in three lines:
+    //       (a) read the price from the clicked item's data-price
+    //       (b) add it to cartTotal
+    //       (c) update cartTotalEl so the page shows the new total
+
+    const items = document.querySelectorAll(".item");
+    for (const item of items) {
+      item.addEventListener("click", () => {
+        // (a) get the price from the data attribute
+
+        // (b) add it to cartTotal
+
+        // (c) update cartTotalEl
+
+      });
+    }
+
+
+
+    // >>> TASK 6: Use the provided countByCategory function below to fill
+    //     in the two stat numbers at the top of the page:
+    //       - the count of "drink" items goes in #drink-count
+    //       - the count of "food" items goes in #food-count
+    //
+    //     (You'll need to grab those two spans first — same DOM methods
+    //     as in TASK 1.)
+
+    function countByCategory(category) {
+      return menu.filter(item => item.category === category).length;
+    }
+
+
+
+    // >>> TASK 7: Set up the Clear Cart button.
+    //
+    //     When clearBtn is clicked, reset cartTotal to 0 and update the
+    //     cartTotalEl display so the page shows 0 again.
+
+
+  </script>
+</body>
+</html>
