@@ -27,6 +27,9 @@
          2-column grid with a small gap between items. Add the rules here. */
 
       margin: 1rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
 
     .item {
@@ -94,11 +97,17 @@
     //     - the #cart-total span     -> store in const cartTotalEl
     //     - the #clear-btn button    -> store in const clearBtn
 
+    const menuContainer = document.querySelector('#menu-container');
+    const cartTotalEl = document.querySelector('#cart-total');
+    const clearBtn = document.querySelector('#clear-btn');
+
 
 
     // >>> TASK 2: Declare a variable named cartTotal to track the running
     //     cart total. Its initial value should be 0. Use the keyword that
     //     allows reassignment (since this value will change).
+
+    let cartTotal = 0;
 
 
 
@@ -128,6 +137,17 @@
     //     item's price — don't hardcode a single value. Test by clicking
     //     different items in the next task and confirming the math.
 
+    let html = '';
+
+    for (const item of menu) {
+      html += `<div class="item" data-id="${item.id}"  
+      data-price="${item.price}">
+        <span class="item-name" >${item.name } </span>
+        <span class="item-price" > $${item.price} </span>
+      </div>`;
+    }
+    menuContainer.innerHTML = html;
+
 
 
     // >>> TASK 5: The iteration + click listener boilerplate is provided
@@ -140,11 +160,11 @@
     for (const item of items) {
       item.addEventListener("click", () => {
         // (a) get the price from the data attribute
-
+        const price = parseFloat(item.dataset.price);
         // (b) add it to cartTotal
-
+        cartTotal += price;
         // (c) update cartTotalEl
-
+        cartTotalEl.textContent = cartTotal;
       });
     }
 
@@ -155,19 +175,34 @@
     //       - the count of "drink" items goes in #drink-count
     //       - the count of "food" items goes in #food-count
     //
+    
     //     (You'll need to grab those two spans first — same DOM methods
     //     as in TASK 1.)
 
+
+    // nned these elements to use funciton count
+    const drinkCountEl = document.querySelector('#drink-count');
+    const foodCountEl = document.querySelector('#food-count');
+
     function countByCategory(category) {
-      return menu.filter(item => item.category === category).length;
+      // console.log(menu.filter(item => item.categ
+    
+      return menu.filter(item => item.category == category).length;
     }
 
+    drinkCountEl.textContent = countByCategory("drink");
+    foodCountEl.textContent = countByCategory("food");
 
 
     // >>> TASK 7: Set up the Clear Cart button.
     //
     //     When clearBtn is clicked, reset cartTotal to 0 and update the
     //     cartTotalEl display so the page shows 0 again.
+
+    clearBtn.addEventListener('click', () => {
+      cartTotal = 0;
+      cartTotalEl.textContent = '0';
+    });
 
 
   </script>
