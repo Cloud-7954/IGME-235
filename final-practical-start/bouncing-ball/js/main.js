@@ -33,14 +33,13 @@ async function setup() {
 
   
     ball = new PIXI.Graphics();
-    ball.lineStyle(10, 0xff0000);
+    ball.lineStyle(10,  0xff0000);
     ball.beginFill(0xff00);
-    ball.drawCircle(0, 0, ballRadius);
+    ball.drawCircle(0, 0 ,  ballRadius);
     ball.endFill();
-
     // put ball atcenter
-    ball.x = screenWidth / 2;
-    ball.y = screenHeight / 2;
+    ball.x=screenWidth /  2;
+    ball.y= screenHeight / 2;
     app.stage.addChild(ball);
 
 
@@ -91,10 +90,10 @@ app.ticker.add(() => {
         ball.x += dx;
 
         ball.y += dy;
-        if (ball.x - ballRadius <= 0 || ball.x + ballRadius >= screenWidth) {
+        if (ball.x - ballRadius <=0 || ball.x +ballRadius >= screenWidth) {
             dx = -dx;
         }
-        if (ball.y - ballRadius <= 0 || ball.y + ballRadius >= screenHeight) {
+        if (ball.y - ballRadius <= 0 || ball.y +ballRadius >=screenHeight) {
             dy = -dy;
         }
     });
@@ -113,8 +112,8 @@ app.ticker.add(() => {
     //     Style it however you like (pick a fontSize, fill color, etc.)
     //     and position it somewhere visible on the canvas. Don't
     //     forget to add it to app.stage.
-    let namePlate = new PIXI.Text("Cloud - IGME 235 Final", { fontSize: 16, fill: 0xFFFFFF });
-    namePlate.x = 10;
+    let namePlate = new PIXI.Text("Cloud - IGME 235 Final");
+    namePlate.x=10;
     namePlate.y = 10;
     app.stage.addChild(namePlate);
 
